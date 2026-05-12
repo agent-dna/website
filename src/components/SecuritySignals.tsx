@@ -48,9 +48,8 @@ type SignalCard = {
   year: string;
   link: string;
   signal: string;
-  agentDnaRelevance: string;
+  riskTheme: string;
   Icon: React.ComponentType<{ className?: string }>;
-  severity: "info" | "warn";
 };
 
 type IncidentCard = {
@@ -76,10 +75,8 @@ const SIGNALS: SignalCard[] = [
     link: "https://www.jpmorganchase.com/ir/annual-report/2025/ar-ceo-letters",
     signal:
       "Dimon's letter names AI alongside geopolitics and persistent inflation as a top forward-looking risk — framing AI investment as material while signaling that governance, controls, and workforce impact must move in step with deployment.",
-    agentDnaRelevance:
-      "AgentDNA gives BFSI leaders a runtime control plane for agent actions, with evidence that ties every action to identity, policy decision, and outcome.",
+    riskTheme: "Board-level AI risk",
     Icon: Landmark,
-    severity: "info",
   },
   {
     industry: "Healthcare",
@@ -91,10 +88,8 @@ const SIGNALS: SignalCard[] = [
     link: "https://www.hhs.gov/hipaa/for-professionals/security/hipaa-security-rule-nprm/factsheet/index.html",
     signal:
       "OCR reports individuals impacted by healthcare data breaches rose from 27M in 2020 to 259M in 2024. The proposed rule requires covered entities to include AI tools in risk analysis and to inventory every system that creates, receives, maintains, or transmits ePHI.",
-    agentDnaRelevance:
-      "AgentDNA records who acted, what data was accessed, and which policies governed each step — converting HIPAA risk-analysis duties into verifiable runtime evidence.",
+    riskTheme: "Patient-data governance & auditability",
     Icon: HeartPulse,
-    severity: "warn",
   },
   {
     industry: "Non-Human Identity",
@@ -105,10 +100,8 @@ const SIGNALS: SignalCard[] = [
     link: "https://www.verizon.com/business/resources/reports/dbir/",
     signal:
       "Third-party involvement in breaches doubled year over year (15% → 30%). Verizon analyzed 441,000 secrets leaked in public repositories; the median time to remediate a leaked secret was 94 days. Non-human credentials \"operate outside the boundaries of human-focused security controls.\"",
-    agentDnaRelevance:
-      "AgentDNA preserves chain-of-custody across human and non-human actors so service accounts, API keys, and MCP tokens are governed at the point of use, not just at issuance.",
+    riskTheme: "Non-human identity expansion",
     Icon: KeySquare,
-    severity: "warn",
   },
   {
     industry: "AI Governance",
@@ -120,10 +113,8 @@ const SIGNALS: SignalCard[] = [
     link: "https://www.nist.gov/itl/ai-risk-management-framework",
     signal:
       "NIST published more than 200 suggested actions across four functions — Govern, Map, Measure, Manage — to integrate trustworthiness into the design, development, deployment, and evaluation of generative AI systems.",
-    agentDnaRelevance:
-      "AgentDNA operationalizes Govern / Map / Measure / Manage at runtime: identity, scope, decisions, and outcomes are captured as evidence by default.",
+    riskTheme: "AI risk management baseline",
     Icon: BookMarked,
-    severity: "info",
   },
   {
     industry: "Agentic AI Risk",
@@ -135,10 +126,8 @@ const SIGNALS: SignalCard[] = [
     link: "https://www.cisa.gov/news-events/news/cisa-us-and-international-partners-release-guide-secure-adoption-agentic-ai",
     signal:
       "Five Eyes cybersecurity agencies name privilege, behavior, and accountability as the core risk categories for agentic AI — and advise organizations to avoid broad or unrestricted agent access, start with low-risk use cases, and fold agents into zero-trust and least-privilege controls.",
-    agentDnaRelevance:
-      "AgentDNA enforces action-level authorization and records the decisions agents take — the exact controls Five Eyes guidance asks for.",
+    riskTheme: "Agentic privilege & accountability",
     Icon: ShieldCheck,
-    severity: "warn",
   },
   {
     industry: "Excessive Agency",
@@ -150,10 +139,8 @@ const SIGNALS: SignalCard[] = [
     link: "https://owasp.org/www-project-top-10-for-large-language-model-applications/",
     signal:
       "OWASP expanded \"Excessive Agency\" for 2025: unchecked permissions, elevated privileges, and unsupervised tool access lead to unintended actions. The new Agentic Top 10 adds \"Tool Misuse\" — agents abusing legitimate tools through parameter pollution and tool-chain manipulation.",
-    agentDnaRelevance:
-      "AgentDNA places authorization at the tool call, not at the session — making Excessive Agency and Tool Misuse runtime controls rather than guidelines.",
+    riskTheme: "Excessive agency & tool misuse",
     Icon: AlertTriangle,
-    severity: "warn",
   },
 ];
 
@@ -259,7 +246,7 @@ export function SecuritySignals() {
           className="mt-8 rounded-3xl border border-soft-200 bg-white p-5 shadow-soft"
         >
           <div className="flex flex-wrap items-center gap-3">
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-200 bg-amber-50 px-2.5 py-0.5 font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-amber-700">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-electric-100 bg-electric-50/70 px-2.5 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-navy-500">
               <ScrollText className="h-3 w-3" />
               Incident &amp; precedent signals
             </span>
@@ -337,7 +324,6 @@ export function SecuritySignals() {
 
 function SignalView({ signal, index }: { signal: SignalCard; index: number }) {
   const { Icon } = signal;
-  const isWarn = signal.severity === "warn";
 
   return (
     <motion.article
@@ -347,16 +333,9 @@ function SignalView({ signal, index }: { signal: SignalCard; index: number }) {
       transition={{ duration: 0.45, delay: Math.min(index * 0.05, 0.25) }}
       className="group relative flex h-full flex-col rounded-3xl border border-soft-200 bg-white p-5 shadow-soft transition-all hover:-translate-y-0.5 hover:border-electric-200 hover:shadow-card"
     >
-      {/* Industry chip + source-type label */}
+      {/* Industry chip (pale blue, navy text) + neutral source-type label */}
       <div className="flex items-start justify-between gap-2">
-        <span
-          className={
-            "inline-flex items-center gap-1.5 rounded-full border px-2 py-0.5 text-[10px] font-bold uppercase tracking-[0.14em] " +
-            (isWarn
-              ? "border-amber-200 bg-amber-50 text-amber-700"
-              : "border-electric-100 bg-electric-50/70 text-electric-700")
-          }
-        >
+        <span className="inline-flex items-center gap-1.5 rounded-full border border-electric-100 bg-electric-50/70 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-navy-500">
           <Icon className="h-3 w-3" />
           {signal.industry}
         </span>
@@ -375,8 +354,18 @@ function SignalView({ signal, index }: { signal: SignalCard; index: number }) {
         {signal.signal}
       </p>
 
+      {/* Risk theme */}
+      <div className="mt-4 flex items-center gap-2">
+        <span className="font-mono text-[9.5px] font-bold uppercase tracking-[0.14em] text-ink-mute">
+          Risk theme
+        </span>
+        <span className="inline-flex items-center rounded-full border border-electric-100 bg-electric-50/70 px-2 py-0.5 text-[11px] font-semibold text-navy-500">
+          {signal.riskTheme}
+        </span>
+      </div>
+
       {/* Source line */}
-      <div className="mt-4 border-t border-soft-200 pt-3">
+      <div className="mt-3 border-t border-soft-200 pt-3">
         <div className="flex items-start justify-between gap-2">
           <div className="min-w-0 text-[10.5px] leading-snug text-ink-mute">
             <span className="font-mono uppercase tracking-wider">
@@ -395,14 +384,6 @@ function SignalView({ signal, index }: { signal: SignalCard; index: number }) {
             <ArrowUpRight className="h-3 w-3" />
           </a>
         </div>
-      </div>
-
-      {/* AgentDNA relevance */}
-      <div className="mt-3 rounded-lg border border-electric-100 bg-electric-50/40 px-3 py-2 text-[12px] leading-relaxed text-navy-500/90">
-        <span className="font-mono text-[9px] font-bold uppercase tracking-[0.14em] text-electric-700">
-          AgentDNA relevance
-        </span>
-        <p className="mt-0.5">{signal.agentDnaRelevance}</p>
       </div>
     </motion.article>
   );
@@ -428,10 +409,10 @@ function IncidentView({
       whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once: true, amount: 0.3 }}
       transition={{ duration: 0.45, delay: index * 0.08 }}
-      className="flex flex-col gap-2 rounded-2xl border border-soft-200 bg-soft-50/60 p-4 transition-all hover:border-amber-200 hover:bg-white"
+      className="flex flex-col gap-2 rounded-2xl border border-soft-200 bg-soft-50/60 p-4 transition-all hover:border-electric-200 hover:bg-white"
     >
       <div className="flex items-center justify-between gap-2">
-        <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-200 bg-amber-50 px-1.5 py-0.5 text-[9.5px] font-bold uppercase tracking-wider text-amber-700">
+        <span className="inline-flex items-center gap-1.5 rounded-full border border-electric-100 bg-electric-50/70 px-1.5 py-0.5 text-[9.5px] font-semibold uppercase tracking-wider text-navy-500">
           <AlertTriangle className="h-2.5 w-2.5" />
           {incident.industry}
         </span>
