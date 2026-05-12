@@ -96,26 +96,11 @@ export function Hero() {
               {" "}for agentic workflows.
             </motion.h1>
 
-            <motion.p
-              initial={{ opacity: 0, y: 14 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.12 }}
-              className="mt-3 max-w-[520px] text-[14px] leading-[1.55] text-ink-subtle sm:text-[15px]"
-            >
-              AgentDNA applies{" "}
-              <span className="font-medium text-navy-500">
-                Authentication, Trust, Governance and Control
-              </span>{" "}
-              across AI agents, agentic workflows, APIs, MCP servers, service
-              accounts and other non-human identities&nbsp;— making every
-              action traceable, scoped, and provable.
-            </motion.p>
-
             <motion.div
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="mt-4 flex flex-wrap items-center gap-2.5"
+              transition={{ duration: 0.6, delay: 0.15 }}
+              className="mt-10 flex flex-wrap items-center gap-2.5 lg:mt-12"
             >
               <a href="#demo" className="btn-primary">
                 Book a Demo <ArrowRight className="h-4 w-4" />
@@ -129,10 +114,14 @@ export function Hero() {
             <motion.div
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              className="mt-5"
+              transition={{ duration: 0.5, delay: 0.28 }}
+              className="mt-12 lg:mt-14"
             >
-              <HeroPromptInput prompt={workflow.prompt} submitted={submitted} />
+              <HeroPromptInput
+                prompt={workflow.prompt}
+                supportLine={workflow.promptSupportLine}
+                submitted={submitted}
+              />
             </motion.div>
           </div>
 

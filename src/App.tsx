@@ -1,7 +1,7 @@
 import { Navbar } from "./components/Navbar";
 import { Hero } from "./components/Hero";
 import { Ecosystem } from "./components/Ecosystem";
-import { CTAStrip } from "./components/CTAStrip";
+import { SecuritySignals } from "./components/SecuritySignals";
 import { AgentsStory } from "./components/AgentsStory";
 import { PlatformSteps } from "./components/PlatformSteps";
 import { Capabilities } from "./components/Capabilities";
@@ -16,7 +16,7 @@ function App() {
       <main>
         <Hero />
         <Ecosystem />
-        <CTAStrip />
+        <SecuritySignals />
         <AgentsStory />
         <PlatformSteps />
         <Capabilities />

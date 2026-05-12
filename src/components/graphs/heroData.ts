@@ -189,6 +189,9 @@ export type WorkflowDef = {
   id: string;
   label: string;
   prompt: string;
+  /** Short workflow-specific note rendered under the prompt input,
+   *  describing what systems the request will expand into. */
+  promptSupportLine: string;
   /** Per-workflow node label override. */
   nodeLabels?: Record<string, string>;
   /** Stage-driven narrative. */
@@ -207,6 +210,8 @@ const finance: WorkflowDef = {
   label: "Finance",
   prompt:
     "Analyze Q4 revenue, compare it with support tickets, update the forecast, and prepare a board summary.",
+  promptSupportLine:
+    "This request expands into finance agents, Salesforce, Snowflake, support data, report generation, and provenance.",
   nodeLabels: {
     n_user:    "CFO · alice",
     n_agent_a: "Finance Agt",
@@ -351,6 +356,8 @@ const devops: WorkflowDef = {
   label: "DevOps",
   prompt:
     "Investigate the production alert, check recent deploys, inspect logs, and draft an incident summary.",
+  promptSupportLine:
+    "This request expands into incident agents, observability tools, deployment history, cloud logs, collaboration channels, and provenance.",
   nodeLabels: {
     n_user:    "SRE · oncall",
     n_agent_a: "Incident Agt",
@@ -496,6 +503,8 @@ const it: WorkflowDef = {
   label: "IT",
   prompt:
     "Prepare onboarding for a new employee, create required accounts, assign apps, and notify the manager.",
+  promptSupportLine:
+    "This request expands into HR systems, access agents, identity providers, SaaS apps, developer tools, manager notification, and provenance.",
   nodeLabels: {
     n_admin:   "IT Admin",
     n_agent_a: "HR Agt",
@@ -630,6 +639,8 @@ const security: WorkflowDef = {
   label: "Security",
   prompt:
     "Review suspicious API activity, check user context, block risky access, and create an audit record.",
+  promptSupportLine:
+    "This request expands into security agents, API gateways, logs, risk scoring, policy decisions, audit records, and provenance.",
   nodeLabels: {
     n_user:    "Sec Analyst",
     n_agent_a: "Security Agt",
