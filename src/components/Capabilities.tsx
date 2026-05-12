@@ -772,20 +772,20 @@ function FlowCell({
         scale: isActive ? 1 : 0.99,
       }}
       transition={{ duration: 0.35 }}
-      className={`rounded-2xl border bg-white p-3.5 text-center transition-colors ${
+      className={`rounded-2xl border-2 bg-white p-3.5 text-center transition-colors ${
         isActive
-          ? "border-electric-300 shadow-[0_0_0_1px_rgba(45,125,255,0.18)]"
-          : "border-soft-200"
+          ? "border-navy-500 shadow-[0_0_0_1px_rgba(10,34,64,0.12)]"
+          : "border-navy-500/40"
       }`}
     >
       <span
-        className={`font-mono text-[12px] font-bold tracking-[0.18em] ${
-          isActive ? "text-electric-700" : "text-ink-mute"
+        className={`font-mono text-[13px] font-extrabold tracking-[0.18em] ${
+          isActive ? "text-navy-500" : "text-navy-500/60"
         }`}
       >
         {tag}
       </span>
-      <p className="mt-0.5 text-[12.5px] text-navy-500">{sub}</p>
+      <p className={`mt-0.5 text-[13px] font-semibold ${isActive ? "text-navy-500" : "text-navy-500/60"}`}>{sub}</p>
     </motion.div>
   );
 }

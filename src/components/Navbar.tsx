@@ -23,7 +23,7 @@ export function Navbar() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all ${
+      className={`fixed inset-x-4 top-5 z-50 rounded-2xl transition-all ${
         scrolled
           ? "border-b border-soft-200 bg-white/85 backdrop-blur-xl"
           : "border-b border-transparent bg-white/0"
@@ -48,9 +48,9 @@ export function Navbar() {
         </ul>
 
         <div className="hidden items-center gap-2 lg:flex">
-          <a href="#contact" className="btn-secondary">
+          {/* <a href="#contact" className="btn-secondary">
             Sign in
-          </a>
+          </a> */}
           <a href="#demo" className="btn-primary">
             Book a Demo <ArrowRight className="h-4 w-4" />
           </a>

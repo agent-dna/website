@@ -1,4 +1,4 @@
-import { ArrowRight, PlayCircle, Quote } from "lucide-react";
+import { ArrowRight, PlayCircle } from "lucide-react";
 import { AgentDNACharacter } from "./AgentDNACharacter";
 
 export function CTAStrip() {
@@ -22,20 +22,7 @@ export function CTAStrip() {
 
           <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-12">
             <div className="relative lg:col-span-8">
-              <blockquote className="relative max-w-[720px] border-l border-electric-400/40 pl-5 sm:pl-6">
-                {/* Small, low-key opening quote glyph */}
-                <Quote
-                  aria-hidden
-                  className="absolute -left-[3px] -top-1 h-4 w-4 -scale-x-100 text-electric-300/45"
-                />
-
-                <p className="font-display text-[19px] font-normal italic leading-[1.55] tracking-[-0.005em] text-white/85 sm:text-[21px] lg:text-[23px]">
-                  &ldquo;The next security boundary is not at login. It is
-                  authorization at the point of action.&rdquo;
-                </p>
-              </blockquote>
-
-              <div className="mt-7 flex flex-wrap gap-3">
+              <div className="flex flex-wrap gap-3">
                 <a href="#demo" className="btn-primary">
                   Book Demo <ArrowRight className="h-4 w-4" />
                 </a>

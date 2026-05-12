@@ -38,19 +38,19 @@ export function HeroPromptInput({
   }, [prompt, cycleKey]);
 
   return (
-    <div className="rounded-2xl border border-soft-200 bg-white/95 p-2.5 shadow-soft backdrop-blur">
-      <div className="mb-1.5 flex items-center gap-2 px-1">
-        <Sparkles className="h-3 w-3 text-electric-600" />
-        <span className="font-mono text-[9.5px] font-semibold uppercase tracking-[0.16em] text-ink-mute">
+    <div className="rounded-xl border border-soft-200 bg-white/95 p-1.5 shadow-soft backdrop-blur">
+      <div className="mb-1 flex items-center gap-1.5 px-1">
+        <Sparkles className="h-2.5 w-2.5 text-electric-600" />
+        <span className="font-mono text-[9px] font-semibold uppercase tracking-[0.16em] text-ink-mute">
           Prompt
         </span>
-        <span className="ml-auto font-mono text-[9.5px] text-ink-mute">{user}</span>
+        <span className="ml-auto font-mono text-[9px] text-ink-mute">{user}</span>
       </div>
-      <div className="flex items-start gap-2 rounded-xl border border-soft-200 bg-white px-3 py-2">
-        <p className="min-h-[2.6em] flex-1 text-[12.5px] leading-snug text-navy-500">
+      <div className="flex items-center gap-1.5 rounded-lg border border-soft-200 bg-white px-2.5 py-1.5">
+        <p className="flex-1 text-[11.5px] leading-snug text-navy-500">
           <span>{typed}</span>
           {!submitted && typed.length < prompt.length && (
-            <span className="ml-0.5 inline-block h-3 w-[2px] -translate-y-0.5 bg-electric-500 align-middle animate-caret" />
+            <span className="ml-0.5 inline-block h-2.5 w-[2px] -translate-y-0.5 bg-electric-500 align-middle animate-caret" />
           )}
         </p>
         <motion.button
@@ -62,9 +62,9 @@ export function HeroPromptInput({
               : { background: "#EAF2FF", color: "#1D5FD9" }
           }
           transition={{ duration: 0.5 }}
-          className="flex h-7 w-7 flex-none items-center justify-center rounded-lg"
+          className="flex h-6 w-6 flex-none items-center justify-center rounded-md"
         >
-          <Send className="h-3.5 w-3.5" />
+          <Send className="h-3 w-3" />
         </motion.button>
       </div>
       {submitted && (

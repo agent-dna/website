@@ -5,31 +5,14 @@ import { ATGCLegend } from "./ATGCLegend";
 import { ProvenanceRecordCard } from "./ProvenanceRecordCard";
 import type { WorkflowDef } from "./graphs/heroData";
 
-/**
- * HeroStage — pure presentational visual.
- * State (workflow + currentStageIndex) lives in `<Hero />`.
- *
- *   Desktop (lg+):
- *     graph card with overlays:
- *       top-left  — Live status chip
- *       top-right — Live AgentDNA Control Plane
- *       bottom-left — Stage callout
- *       bottom-right — Provenance Record card (last stage)
- *     ATGC legend strip below
- *
- *   Below lg:
- *     graph card with status + step-callout overlays only
- *     ATGC legend
- *     stacked Control Plane card
- *     stacked Provenance Record card
- */
-
 export function HeroStage({
   workflow,
   currentStageIndex,
+  onStepClick,
 }: {
   workflow: WorkflowDef;
   currentStageIndex: number;
+  onStepClick?: (index: number) => void;
 }) {
   const currentStage =
     currentStageIndex >= 0 && currentStageIndex < workflow.stages.length
@@ -40,8 +23,10 @@ export function HeroStage({
 
   return (
     <div className="flex flex-col gap-3">
-      <div className="relative h-[380px] w-full overflow-hidden rounded-3xl border border-soft-200 bg-white shadow-card sm:h-[440px] md:h-[480px] lg:h-[460px] xl:h-[500px]">
-        {/* depth wash */}
+      <div
+        className="relative w-full overflow-hidden rounded-3xl border border-soft-200 bg-white shadow-card"
+        style={{ height: "clamp(360px, 48vh, 560px)" }}
+      >
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0"
@@ -57,7 +42,7 @@ export function HeroStage({
         />
 
         {/* Live status chip — top-left */}
-        <div className="absolute left-3 top-3 rounded-full border border-soft-200 bg-white/95 px-2.5 py-1 text-[10.5px] font-medium text-navy-500 backdrop-blur">
+        <div className="absolute left-4 top-4 rounded-full border border-soft-200 bg-white/95 px-2.5 py-1 text-[10.5px] font-medium text-navy-500 backdrop-blur">
           <span className="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-emerald-500 align-middle" />
           <span className="font-mono uppercase tracking-wider">{workflow.label}</span>
           {currentStage && (
@@ -68,32 +53,12 @@ export function HeroStage({
           )}
         </div>
 
-        {/* Control Plane — overlay (lg+ only) */}
+        {/* Provenance Record — top-right inside graph */}
         <motion.div
-          initial={{ opacity: 0, x: 6 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="absolute right-3 top-3 hidden w-[228px] lg:block"
-        >
-          <AgentDNAControlPlane
-            workflowLabel={workflow.label}
-            stages={workflow.stages}
-            currentStageIndex={currentStageIndex}
-          />
-        </motion.div>
-
-        {/* Stage callout — bottom-left */}
-        <StageCallout
-          workflow={workflow}
-          currentStageIndex={currentStageIndex}
-        />
-
-        {/* Provenance Record — overlay bottom-right (lg+ only) */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: showProvenance ? 1 : 0, y: showProvenance ? 0 : 12 }}
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: showProvenance ? 1 : 0, y: showProvenance ? 0 : 8 }}
           transition={{ duration: 0.55 }}
-          className="pointer-events-none absolute bottom-3 right-3 hidden w-[228px] lg:block"
+          className="pointer-events-none absolute bottom-4 right-4 w-[220px]"
         >
           <ProvenanceRecordCard
             visible={showProvenance}
@@ -101,10 +66,8 @@ export function HeroStage({
             lines={workflow.provenance.lines.slice(0, 5)}
           />
         </motion.div>
-      </div>
 
-      {/* ATGC legend — below the graph */}
-      <ATGCLegend />
+      </div>
 
       {/* Stacked panels for below-lg */}
       <div className="grid gap-3 lg:hidden">
@@ -112,6 +75,7 @@ export function HeroStage({
           workflowLabel={workflow.label}
           stages={workflow.stages}
           currentStageIndex={currentStageIndex}
+          onStepClick={onStepClick}
         />
         <ProvenanceRecordCard
           visible={showProvenance}
@@ -120,64 +84,5 @@ export function HeroStage({
         />
       </div>
     </div>
-  );
-}
-
-/* ---------- stage callout ---------- */
-
-function StageCallout({
-  workflow,
-  currentStageIndex,
-}: {
-  workflow: WorkflowDef;
-  currentStageIndex: number;
-}) {
-  const currentStage =
-    currentStageIndex >= 0 && currentStageIndex < workflow.stages.length
-      ? workflow.stages[currentStageIndex]
-      : undefined;
-
-  const title = currentStage?.title ?? "Workflow assembled";
-  const letters = currentStage?.atgc ?? [];
-  const description =
-    currentStage?.description ??
-    "User prompt awaiting AgentDNA verification.";
-
-  return (
-    <motion.div
-      key={currentStageIndex}
-      initial={{ opacity: 0, y: 6 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4 }}
-      className="absolute bottom-3 left-3 max-w-[260px]"
-    >
-      <div className="flex items-start gap-2 rounded-xl border border-electric-200 bg-white/95 px-2.5 py-2 shadow-soft backdrop-blur">
-        <span className="mt-0.5 flex h-7 w-7 flex-none items-center justify-center rounded-lg bg-navy-500 font-mono text-[11px] font-extrabold text-white">
-          {currentStageIndex >= 0 ? currentStageIndex + 1 : "0"}
-        </span>
-        <div className="min-w-0 flex-1">
-          <div className="flex items-center gap-1.5">
-            <span className="truncate text-[12px] font-semibold text-navy-500">
-              {title}
-            </span>
-            {letters.length > 0 && (
-              <span className="ml-auto flex flex-none items-center gap-0.5">
-                {letters.map((l) => (
-                  <span
-                    key={l}
-                    className="flex h-3.5 w-3.5 items-center justify-center rounded bg-navy-500 font-mono text-[8.5px] font-bold text-white"
-                  >
-                    {l}
-                  </span>
-                ))}
-              </span>
-            )}
-          </div>
-          <div className="mt-0.5 text-[10px] leading-snug text-ink-subtle line-clamp-2">
-            {description}
-          </div>
-        </div>
-      </div>
-    </motion.div>
   );
 }
