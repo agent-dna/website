@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 import { BrandLogo, brand } from "../BrandLogo";
 import { AgentDNACharacter } from "../AgentDNACharacter";
 import {
-  HERO_AMBIENT_EDGES,
   HERO_NODES,
   edgesFiringAtStage,
   isEdgeActiveAtStage,
@@ -53,26 +52,19 @@ function curve(a: GraphNode, b: GraphNode): string {
   return `M ${a.x} ${a.y} C ${c1x.toFixed(1)} ${c1y.toFixed(1)}, ${c2x.toFixed(1)} ${c2y.toFixed(1)}, ${b.x} ${b.y}`;
 }
 
-function edgeStyle(status: GraphEdge["status"], active: boolean) {
+/** Stroke style for an *active* edge. Inactive edges are not rendered. */
+function activeEdgeStyle(status: GraphEdge["status"]) {
   switch (status) {
     case "approve":
-      return active
-        ? { stroke: "url(#hg-edge-approve)", width: 1.4, dash: undefined as string | undefined }
-        : { stroke: "rgba(10,34,64,0.14)", width: 1, dash: "3 4" };
+      return { stroke: "url(#hg-edge-approve)", width: 1.4, dash: undefined as string | undefined };
     case "automation":
       return { stroke: "rgba(110,127,147,0.22)", width: 0.85, dash: "1 5" };
     case "pending":
-      return active
-        ? { stroke: "#F59E0B", width: 1.3, dash: "5 4" }
-        : { stroke: "rgba(245,158,11,0.35)", width: 1, dash: "5 4" };
+      return { stroke: "#F59E0B", width: 1.3, dash: "5 4" };
     case "deny":
-      return active
-        ? { stroke: "#EF4444", width: 1.4, dash: "5 4" }
-        : { stroke: "rgba(239,68,68,0.35)", width: 1, dash: "3 4" };
+      return { stroke: "#EF4444", width: 1.4, dash: "5 4" };
     case "provenance":
-      return active
-        ? { stroke: "rgba(110,157,255,0.55)", width: 0.9, dash: "1 4" }
-        : { stroke: "rgba(110,157,255,0.18)", width: 0.8, dash: "1 4" };
+      return { stroke: "rgba(110,157,255,0.55)", width: 0.9, dash: "1 4" };
   }
 }
 
@@ -93,10 +85,9 @@ export function HeroExecutionGraph({
     return m;
   }, []);
 
-  const allEdges = useMemo(
-    () => [...HERO_AMBIENT_EDGES, ...workflow.edges],
-    [workflow.edges],
-  );
+  // Edges are workflow-scoped only — no always-on ambient scaffolding.
+  // A line is drawn only when its action actually happens (stage activates).
+  const allEdges = workflow.edges;
 
   const firingEdges = useMemo(
     () => edgesFiringAtStage(workflow, currentStageIndex),
@@ -323,25 +314,33 @@ export function HeroExecutionGraph({
 
 /* ---------- edge renderer ---------- */
 
+/**
+ * Render an edge only when active. Inactive edges are not drawn — the graph
+ * stays clean and lines appear as actions actually happen. The freshly-active
+ * edge fades in alongside the FiringPulse so the connection visibly arrives.
+ */
 function renderEdge(
   edge: GraphEdge,
   nodeMap: Map<string, GraphNode>,
   active: boolean,
 ) {
+  if (!active) return null;
   const a = nodeMap.get(edge.from);
   const b = nodeMap.get(edge.to);
   if (!a || !b) return null;
   const path = curve(a, b);
-  const style = edgeStyle(edge.status, active);
+  const style = activeEdgeStyle(edge.status);
   return (
-    <path
+    <motion.path
       key={edge.id}
       d={path}
       fill="none"
       stroke={style.stroke}
       strokeWidth={style.width}
       strokeDasharray={style.dash}
-      style={{ transition: "stroke 700ms ease, stroke-width 700ms ease" }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.45, ease: "easeOut" }}
     />
   );
 }
