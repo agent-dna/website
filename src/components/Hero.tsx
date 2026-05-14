@@ -33,9 +33,17 @@ function pickWorkflow(): WorkflowDef {
 }
 
 export function Hero() {
-  const [workflow] = useState<WorkflowDef>(pickWorkflow);
+  const [workflow, setWorkflow] = useState<WorkflowDef>(pickWorkflow);
   /** -1 = idle (prompt typing), 0..n-1 = active stage. */
   const [stageIndex, setStageIndex] = useState<number>(-1);
+
+  const cycleWorkflow = () => {
+    setStageIndex(-1);
+    setWorkflow((current) => {
+      const idx = WORKFLOWS.findIndex((w) => w.id === current.id);
+      return WORKFLOWS[(idx + 1) % WORKFLOWS.length];
+    });
+  };
 
   useEffect(() => {
     // Brief idle pause so the prompt typewriter has time to complete.
@@ -53,7 +61,7 @@ export function Hero() {
   return (
     <section
       id="top"
-      className="relative overflow-hidden bg-white pt-20 lg:pt-24"
+      className="relative overflow-hidden bg-white pt-32 lg:pt-40"
     >
       <div
         aria-hidden
@@ -127,9 +135,44 @@ export function Hero() {
 
           {/* Right column — execution graph (~60%) */}
           <div className="lg:col-span-7">
-            <HeroStage workflow={workflow} currentStageIndex={stageIndex} />
+            <HeroStage
+              workflow={workflow}
+              currentStageIndex={stageIndex}
+              onNext={cycleWorkflow}
+            />
           </div>
         </div>
+
+        {/* Outcome metrics strip */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.55, delay: 0.4 }}
+          className="mt-10 flex flex-nowrap items-center justify-center gap-x-6 overflow-x-auto border-t border-soft-200 pt-6 lg:mt-14 lg:gap-x-10"
+        >
+          {[
+            { value: "100%", label: "identity coverage" },
+            { value: "0", label: "unverified actions" },
+            { value: "90%+", label: "blast-radius reduction" },
+          ].map((m, i, arr) => (
+            <div key={m.label} className="flex flex-none items-center gap-x-6 whitespace-nowrap lg:gap-x-10">
+              <div className="flex items-baseline gap-2">
+                <span className="font-display text-[24px] font-extrabold tracking-[-0.01em] text-navy-500 sm:text-[28px]">
+                  {m.value}
+                </span>
+                <span className="text-[13px] font-bold text-navy-500 sm:text-[14px]">
+                  {m.label}
+                </span>
+              </div>
+              {i < arr.length - 1 && (
+                <span
+                  aria-hidden
+                  className="hidden h-1.5 w-1.5 rounded-full bg-soft-200 sm:inline-block"
+                />
+              )}
+            </div>
+          ))}
+        </motion.div>
       </div>
     </section>
   );

@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 48" fill="none">
-  <rect x="2" y="4" width="40" height="40" rx="10" fill="#FFFFFF"/>
-  <path d="M14 14c4 6 14 6 14 14M28 14c-4 6-14 6-14 14" stroke="#0A2240" stroke-width="2.4" stroke-linecap="round"/>
-  <circle cx="16" cy="18" r="1.6" fill="#0A2240"/>
-  <circle cx="26" cy="30" r="1.6" fill="#0A2240"/>
-  <text x="54" y="33" font-family="Inter, system-ui, sans-serif" font-size="22" font-weight="700" fill="#FFFFFF" letter-spacing="-0.5">AgentDNA</text>
-</svg>

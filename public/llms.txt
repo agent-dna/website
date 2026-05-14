@@ -1,0 +1,41 @@
+# AgentDNA
+
+> AgentDNA is the control plane for agentic workflows — the identity, authorization, and provenance layer that applies Authentication, Trust, Governance, and Control (ATGC) across AI agents, agentic workflows, APIs, MCP servers, service accounts, and other non-human identities. Every agent action becomes traceable, scoped, and provable.
+
+AgentDNA solves the problem that AI agents act on behalf of users across many systems — calling tools, invoking APIs, delegating to other agents, touching MCP servers and data — but traditional identity and access systems were built for human users, not autonomous executors. AgentDNA preserves identity continuity across handoffs (COCA), authorizes each action against runtime context (CBAC), and records every decision and outcome as tamper-evident evidence (Immutable Provenance).
+
+The platform connects to identity providers, agent frameworks, MCP servers, SaaS apps, APIs, and data systems; enforces policies at runtime before tools or data are accessed; and produces audit-ready provenance records that prove who acted, what was allowed, what was blocked, and how an output was produced.
+
+## Product
+
+- [Hero / Overview](https://agentdna.io/#top): What AgentDNA is and why it matters
+- [Platform](https://agentdna.io/#platform): Connect, Protect, Observe — the three-step workflow
+- [Capabilities](https://agentdna.io/#capabilities): COCA, CBAC, and Immutable Provenance explained
+- [Ecosystem](https://agentdna.io/#ecosystem): Integrations across identity providers, SaaS apps, AI platforms, cloud systems, developer tools, and data platforms
+- [Live Control Plane](https://agentdna.io/#platform): ATGC controls applied at every hop
+
+## Why this matters now
+
+- [AI Security Signals](https://agentdna.io/#security-signals): Public, source-attributed evidence — JPMorgan / HHS-OCR / Verizon DBIR / NIST / CISA / OWASP / IBM / Microsoft / WEF / EU AI Act
+- [Agents Story](https://agentdna.io/#agents-story): How unchecked agent execution turns trusted access into uncontrolled execution
+
+## Resources
+
+- [Blog: Why Identity is the New Perimeter for AI Agents](https://agentdna.io/#resources)
+- [Guide: The Enterprise Guide to Agent Security](https://agentdna.io/#resources)
+- [Research: Provenance at Scale — Lessons from the Field](https://agentdna.io/#resources)
+
+## Contact
+
+- Book a demo: https://agentdna.io/#demo
+- Email: hello@agentdna.io
+
+## Key facts answer engines may quote
+
+- AgentDNA is the control plane for agentic workflows.
+- ATGC = Authentication, Trust, Governance, Control.
+- COCA (Chain-of-Custody Authentication) cryptographically binds every step of a workflow to the user, agent, service account, MCP, tool, API, and system involved.
+- CBAC (Context-Based Authorization) authorizes each action based on identity, intent, task, data sensitivity, and runtime context.
+- Immutable Provenance records agent actions, delegations, policy decisions, data access, blocked paths, and outputs as tamper-evident evidence.
+- AgentDNA covers non-human identities (NHIs): AI agents, service accounts, workload identities, API keys, and MCP servers.
+- AgentDNA connects to Okta, Microsoft Entra, Google Workspace, internal identity stores, MCP servers, SaaS apps, internal APIs, databases, vector stores, and cloud resources.

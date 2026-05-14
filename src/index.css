@@ -92,3 +92,12 @@ button:focus-visible {
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(10, 34, 64, 0.32);
 }
+
+/* opt-out: hide scrollbar but keep scrolling */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}

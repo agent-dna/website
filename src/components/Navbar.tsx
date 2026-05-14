@@ -5,6 +5,7 @@ import { Logo } from "./Logo";
 const links = [
   { label: "Platform", href: "#platform" },
   { label: "Ecosystem", href: "#ecosystem" },
+  { label: "AI Threats", href: "#ai-threats" },
   { label: "Capabilities", href: "#capabilities" },
   { label: "Resources", href: "#resources" },
   { label: "Company", href: "#company" },
@@ -23,15 +24,15 @@ export function Navbar() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all ${
+      className={`fixed inset-x-0 top-3 z-50 transition-all ${
         scrolled
           ? "border-b border-soft-200 bg-white/85 backdrop-blur-xl"
           : "border-b border-transparent bg-white/0"
       }`}
     >
-      <nav className="container-page flex h-16 items-center justify-between">
+      <nav className="container-page flex h-16 items-center justify-between pt-[5px]">
         <a href="#top" className="flex items-center gap-2">
-          <Logo variant="blue" height={28} />
+          <Logo variant="blue" height={50} />
         </a>
 
         <ul className="hidden items-center gap-1 lg:flex">
@@ -48,9 +49,6 @@ export function Navbar() {
         </ul>
 
         <div className="hidden items-center gap-2 lg:flex">
-          <a href="#contact" className="btn-secondary">
-            Sign in
-          </a>
           <a href="#demo" className="btn-primary">
             Book a Demo <ArrowRight className="h-4 w-4" />
           </a>
@@ -81,9 +79,6 @@ export function Navbar() {
             ))}
           </ul>
           <div className="mt-4 flex gap-2">
-            <a href="#contact" className="btn-secondary flex-1">
-              Sign in
-            </a>
             <a href="#demo" className="btn-primary flex-1">
               Book a Demo
             </a>

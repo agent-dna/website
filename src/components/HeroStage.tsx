@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { ChevronRight } from "lucide-react";
 import { HeroExecutionGraph } from "./graphs/HeroExecutionGraph";
 import { AgentDNAControlPlane } from "./AgentDNAControlPlane";
 import { ATGCLegend } from "./ATGCLegend";
@@ -27,9 +28,11 @@ import type { WorkflowDef } from "./graphs/heroData";
 export function HeroStage({
   workflow,
   currentStageIndex,
+  onNext,
 }: {
   workflow: WorkflowDef;
   currentStageIndex: number;
+  onNext?: () => void;
 }) {
   const currentStage =
     currentStageIndex >= 0 && currentStageIndex < workflow.stages.length
@@ -40,6 +43,7 @@ export function HeroStage({
 
   return (
     <div className="flex flex-col gap-3">
+      <div className="relative">
       <div className="relative h-[380px] w-full overflow-hidden rounded-3xl border border-soft-200 bg-white shadow-card sm:h-[440px] md:h-[480px] lg:h-[460px] xl:h-[500px]">
         {/* depth wash */}
         <div
@@ -101,6 +105,19 @@ export function HeroStage({
             lines={workflow.provenance.lines.slice(0, 5)}
           />
         </motion.div>
+      </div>
+
+        {/* Next-workflow button — outside the card, right edge */}
+        {onNext && (
+          <button
+            type="button"
+            onClick={onNext}
+            aria-label="Show next workflow"
+            className="group absolute right-[-32px] top-1/2 z-10 flex h-7 w-7 -translate-y-1/2 items-center justify-center rounded-full border border-soft-200 bg-white text-navy-500 shadow-soft transition-all hover:border-electric-300 hover:bg-electric-50 hover:text-electric-600 hover:shadow-card focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-electric-300"
+          >
+            <ChevronRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+          </button>
+        )}
       </div>
 
       {/* ATGC legend — below the graph */}
