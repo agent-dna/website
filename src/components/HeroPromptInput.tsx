@@ -52,7 +52,7 @@ export function HeroPromptInput({
         </span>
       </div>
       <div className="flex items-start gap-2.5 rounded-xl border border-soft-200 bg-white px-3.5 py-3">
-        <p className="min-h-[3em] flex-1 text-[13px] leading-snug text-navy-500">
+        <p className="min-h-[3em] flex-1 text-[13px] font-medium leading-snug text-navy-500">
           <span>{typed}</span>
           {!submitted && typed.length < prompt.length && (
             <span className="ml-0.5 inline-block h-3 w-[2px] -translate-y-0.5 bg-electric-500 align-middle animate-caret" />

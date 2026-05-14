@@ -53,7 +53,7 @@ export function Hero() {
   return (
     <section
       id="top"
-      className="relative overflow-hidden bg-white pt-20 lg:pt-24"
+      className="relative overflow-hidden bg-white pt-32 lg:pt-40"
     >
       <div
         aria-hidden

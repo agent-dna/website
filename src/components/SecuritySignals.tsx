@@ -1,14 +1,15 @@
 import { motion } from "framer-motion";
 import {
   AlertTriangle,
-  ArrowRight,
   ArrowUpRight,
   BookMarked,
-  FileSignature,
+  Building2,
+  Globe,
   HeartPulse,
   KeySquare,
   Landmark,
-  ScrollText,
+  Scale,
+  ShieldAlert,
   ShieldCheck,
 } from "lucide-react";
 
@@ -50,15 +51,6 @@ type SignalCard = {
   signal: string;
   riskTheme: string;
   Icon: React.ComponentType<{ className?: string }>;
-};
-
-type IncidentCard = {
-  title: string;
-  industry: string;
-  source: string;
-  year: string;
-  link: string;
-  takeaway: string;
 };
 
 /* ============================================================
@@ -142,60 +134,53 @@ const SIGNALS: SignalCard[] = [
     riskTheme: "Excessive agency & tool misuse",
     Icon: AlertTriangle,
   },
-];
-
-const INCIDENTS: IncidentCard[] = [
   {
-    title:
-      "AI coding agent destroyed production data during a designated code freeze",
-    industry: "Software / DevOps",
-    source: "Fortune, Tom's Hardware",
+    industry: "Cyber Economics",
+    organization: "IBM Security",
+    sourceLabel: "Industry report",
+    sourceTitle: "Cost of a Data Breach Report 2024",
+    year: "2024",
+    link: "https://www.ibm.com/reports/data-breach",
+    signal:
+      "Global average cost of a data breach reached $4.88M — a 10% jump year over year and the largest single-year rise since the pandemic. Breaches involving shadow data took 26.2% longer to identify and 20.2% longer to contain.",
+    riskTheme: "Breach cost & data sprawl",
+    Icon: Building2,
+  },
+  {
+    industry: "Identity Attacks",
+    organization: "Microsoft",
+    sourceLabel: "Industry report",
+    sourceTitle: "Microsoft Digital Defense Report 2024",
+    year: "2024",
+    link: "https://www.microsoft.com/en-us/security/security-insider/microsoft-digital-defense-report-2024",
+    signal:
+      "Microsoft tracks more than 600 million identity attacks per day, the vast majority password-based. Token theft and adversary-in-the-middle phishing increasingly bypass MFA — stolen tokens get reused to impersonate trusted identities.",
+    riskTheme: "Identity attack surface",
+    Icon: ShieldAlert,
+  },
+  {
+    industry: "Global Risk",
+    organization: "World Economic Forum",
+    sourceLabel: "Industry report",
+    sourceTitle: "Global Cybersecurity Outlook 2025",
     year: "2025",
-    link: "https://fortune.com/2025/07/23/ai-coding-tool-replit-wiped-database-called-it-a-catastrophic-failure/",
-    takeaway:
-      "An agent with production access ran destructive commands during a code freeze and then misreported the outcome — broad permissions outpaced human review.",
+    link: "https://www.weforum.org/publications/global-cybersecurity-outlook-2025/",
+    signal:
+      "WEF documents a widening AI readiness gap: 66% of organizations expect AI to have the most significant impact on cybersecurity in the year ahead, yet only 37% report having processes in place to assess the security of AI tools before deployment.",
+    riskTheme: "AI readiness gap",
+    Icon: Globe,
   },
   {
-    title:
-      "Largest U.S. healthcare breach affected ~190M individuals",
-    industry: "Healthcare",
-    source: "HHS OCR, TechCrunch",
+    industry: "Regulation",
+    organization: "European Union",
+    sourceLabel: "Regulatory signal",
+    sourceTitle: "EU AI Act — Regulation (EU) 2024/1689",
     year: "2024",
-    link: "https://techcrunch.com/2024/10/24/unitedhealth-change-healthcare-hacked-millions-health-records-ransomware/",
-    takeaway:
-      "A single ungoverned identity path — a remote service without MFA — cascaded across roughly one in three U.S. patient records.",
-  },
-  {
-    title:
-      "Tribunal held airline liable for misinformation produced by its AI chatbot",
-    industry: "Customer service",
-    source: "BC Civil Resolution Tribunal, CBC News",
-    year: "2024",
-    link: "https://www.cbc.ca/news/canada/british-columbia/air-canada-chatbot-lawsuit-1.7116416",
-    takeaway:
-      "Companies remain legally accountable for what their AI says and does — provenance becomes the evidence record.",
-  },
-];
-
-const TAKEAWAYS: {
-  title: string;
-  body: string;
-  Icon: React.ComponentType<{ className?: string }>;
-}[] = [
-  {
-    title: "Access becomes action",
-    body: "Agents do not just hold permissions. They use them across apps, APIs, MCP servers, and data systems.",
-    Icon: KeySquare,
-  },
-  {
-    title: "Authorization must move closer to execution",
-    body: "Agent actions need runtime checks before tools, data, or external systems are used.",
-    Icon: ShieldCheck,
-  },
-  {
-    title: "Provenance becomes mandatory",
-    body: "Teams need proof of who acted, what was allowed, what was blocked, and what outcome was produced.",
-    Icon: FileSignature,
+    link: "https://artificialintelligenceact.eu/",
+    signal:
+      "The EU AI Act entered into force August 2024, with prohibitions on unacceptable-risk AI applying from February 2025 and obligations on general-purpose AI models from August 2025. Non-compliance penalties reach up to €35M or 7% of global annual turnover.",
+    riskTheme: "AI regulatory enforcement",
+    Icon: Scale,
   },
 ];
 
@@ -230,89 +215,27 @@ export function SecuritySignals() {
           </p>
         </div>
 
-        {/* Signal cards — source-backed */}
-        <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {SIGNALS.map((s, i) => (
-            <SignalView key={i} signal={s} index={i} />
+        {/* Signal cards — two rows, each independently horizontally scrollable */}
+        <div className="mt-10 space-y-4">
+          {[
+            SIGNALS.slice(0, Math.ceil(SIGNALS.length / 2)),
+            SIGNALS.slice(Math.ceil(SIGNALS.length / 2)),
+          ].map((row, rowIdx) => (
+            <div
+              key={rowIdx}
+              className="no-scrollbar touch-pan-x overflow-x-auto overflow-y-hidden pb-1"
+            >
+              <div className="flex w-max gap-4 snap-x snap-mandatory">
+                {row.map((s, i) => (
+                  <div key={i} className="w-[338px] flex-none snap-start">
+                    <SignalView signal={s} index={i} />
+                  </div>
+                ))}
+              </div>
+            </div>
           ))}
         </div>
 
-        {/* Incident / precedent strip */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.5 }}
-          className="mt-8 rounded-3xl border border-soft-200 bg-white p-5 shadow-soft"
-        >
-          <div className="flex flex-wrap items-center gap-3">
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-electric-100 bg-electric-50/70 px-2.5 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-navy-500">
-              <ScrollText className="h-3 w-3" />
-              Incident &amp; precedent signals
-            </span>
-            <span className="text-[11.5px] text-ink-mute">
-              Public, source-attributed cases — operational damage,
-              regulatory exposure, and accountability precedents.
-            </span>
-          </div>
-          <div className="mt-4 grid grid-cols-1 gap-3 md:grid-cols-3">
-            {INCIDENTS.map((it, i) => (
-              <IncidentView key={i} incident={it} index={i} />
-            ))}
-          </div>
-        </motion.div>
-
-        {/* Summary strip — what this means for agentic workflows */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="mt-8 rounded-3xl border border-electric-200 bg-gradient-to-b from-electric-50/40 to-white p-6 shadow-soft"
-        >
-          <div className="text-center">
-            <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-electric-700">
-              What this means for agentic workflows
-            </span>
-          </div>
-
-          <ul className="mt-5 grid grid-cols-1 gap-4 md:grid-cols-3">
-            {TAKEAWAYS.map((t) => (
-              <li
-                key={t.title}
-                className="flex items-start gap-3 rounded-2xl border border-soft-200 bg-white p-4"
-              >
-                <span
-                  className="flex h-9 w-9 flex-none items-center justify-center rounded-xl border border-electric-100 text-electric-600 ring-1 ring-inset ring-white"
-                  style={{
-                    background:
-                      "linear-gradient(180deg,#FFFFFF 0%,#EAF2FF 100%)",
-                  }}
-                >
-                  <t.Icon className="h-4 w-4" />
-                </span>
-                <div className="min-w-0">
-                  <div className="text-[13.5px] font-semibold text-navy-500">
-                    {t.title}
-                  </div>
-                  <p className="mt-1 text-[12.5px] leading-relaxed text-ink-subtle">
-                    {t.body}
-                  </p>
-                </div>
-              </li>
-            ))}
-          </ul>
-
-          <div className="mt-6 flex justify-center">
-            <a
-              href="#platform"
-              className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-electric-700 hover:text-electric-600"
-            >
-              See AgentDNA in action
-              <ArrowRight className="h-3.5 w-3.5" />
-            </a>
-          </div>
-        </motion.div>
       </div>
     </section>
   );
@@ -331,7 +254,7 @@ function SignalView({ signal, index }: { signal: SignalCard; index: number }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.45, delay: Math.min(index * 0.05, 0.25) }}
-      className="group relative flex h-full flex-col rounded-3xl border border-soft-200 bg-white p-5 shadow-soft transition-all hover:-translate-y-0.5 hover:border-electric-200 hover:shadow-card"
+      className="group relative flex h-full flex-col rounded-3xl border border-soft-200 bg-white p-4 shadow-soft transition-all hover:-translate-y-0.5 hover:border-electric-200 hover:shadow-card"
     >
       {/* Industry chip (pale blue, navy text) + neutral source-type label */}
       <div className="flex items-start justify-between gap-2">
@@ -345,17 +268,17 @@ function SignalView({ signal, index }: { signal: SignalCard; index: number }) {
       </div>
 
       {/* Organization */}
-      <div className="mt-3 text-[14px] font-semibold leading-snug text-navy-500">
+      <div className="mt-2.5 text-[14px] font-semibold leading-snug text-navy-500">
         {signal.organization}
       </div>
 
       {/* Signal body — source-backed paraphrase or verified quote */}
-      <p className="mt-2 flex-1 text-[12.5px] leading-relaxed text-ink-subtle">
+      <p className="mt-1.5 flex-1 text-[12.5px] leading-snug text-ink-subtle">
         {signal.signal}
       </p>
 
       {/* Risk theme */}
-      <div className="mt-4 flex items-center gap-2">
+      <div className="mt-3 flex items-center gap-2">
         <span className="font-mono text-[9.5px] font-bold uppercase tracking-[0.14em] text-ink-mute">
           Risk theme
         </span>
@@ -365,7 +288,7 @@ function SignalView({ signal, index }: { signal: SignalCard; index: number }) {
       </div>
 
       {/* Source line */}
-      <div className="mt-3 border-t border-soft-200 pt-3">
+      <div className="mt-2.5 border-t border-soft-200 pt-2.5">
         <div className="flex items-start justify-between gap-2">
           <div className="min-w-0 text-[10.5px] leading-snug text-ink-mute">
             <span className="font-mono uppercase tracking-wider">
@@ -389,52 +312,3 @@ function SignalView({ signal, index }: { signal: SignalCard; index: number }) {
   );
 }
 
-/* ============================================================
- * Incident card — verified public reports / rulings
- * ============================================================ */
-
-function IncidentView({
-  incident,
-  index,
-}: {
-  incident: IncidentCard;
-  index: number;
-}) {
-  return (
-    <motion.a
-      href={incident.link}
-      target="_blank"
-      rel="noopener noreferrer"
-      initial={{ opacity: 0, x: -8 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true, amount: 0.3 }}
-      transition={{ duration: 0.45, delay: index * 0.08 }}
-      className="flex flex-col gap-2 rounded-2xl border border-soft-200 bg-soft-50/60 p-4 transition-all hover:border-electric-200 hover:bg-white"
-    >
-      <div className="flex items-center justify-between gap-2">
-        <span className="inline-flex items-center gap-1.5 rounded-full border border-electric-100 bg-electric-50/70 px-1.5 py-0.5 text-[9.5px] font-semibold uppercase tracking-wider text-navy-500">
-          <AlertTriangle className="h-2.5 w-2.5" />
-          {incident.industry}
-        </span>
-        <span className="font-mono text-[9px] text-ink-mute">
-          {incident.year}
-        </span>
-      </div>
-      <h4 className="text-[13px] font-semibold leading-snug text-navy-500">
-        {incident.title}
-      </h4>
-      <p className="text-[12px] leading-relaxed text-ink-subtle">
-        {incident.takeaway}
-      </p>
-      <div className="mt-auto flex items-center justify-between pt-1">
-        <span className="truncate font-mono text-[9.5px] text-ink-mute">
-          {incident.source}
-        </span>
-        <span className="flex flex-none items-center gap-0.5 text-[10px] font-semibold text-electric-700">
-          Source
-          <ArrowUpRight className="h-3 w-3" />
-        </span>
-      </div>
-    </motion.a>
-  );
-}
