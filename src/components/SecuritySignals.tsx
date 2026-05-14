@@ -190,7 +190,7 @@ const SIGNALS: SignalCard[] = [
 
 export function SecuritySignals() {
   return (
-    <section className="relative bg-soft-50 py-20">
+    <section id="ai-threats" className="relative bg-soft-50 py-20">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0"
@@ -282,7 +282,7 @@ function SignalView({ signal, index }: { signal: SignalCard; index: number }) {
         <span className="font-mono text-[9.5px] font-bold uppercase tracking-[0.14em] text-ink-mute">
           Risk theme
         </span>
-        <span className="inline-flex items-center rounded-full border border-electric-100 bg-electric-50/70 px-2 py-0.5 text-[11px] font-semibold text-navy-500">
+        <span className="inline-flex items-center rounded-full border border-electric-200 bg-electric-50/70 px-2 py-0.5 text-[11px] font-bold text-electric-700">
           {signal.riskTheme}
         </span>
       </div>

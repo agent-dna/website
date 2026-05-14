@@ -5,6 +5,7 @@ import { Logo } from "./Logo";
 const links = [
   { label: "Platform", href: "#platform" },
   { label: "Ecosystem", href: "#ecosystem" },
+  { label: "AI Threats", href: "#ai-threats" },
   { label: "Capabilities", href: "#capabilities" },
   { label: "Resources", href: "#resources" },
   { label: "Company", href: "#company" },
