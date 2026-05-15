@@ -5,7 +5,7 @@ import { SecuritySignals } from "./components/SecuritySignals";
 import { AgentsStory } from "./components/AgentsStory";
 import { PlatformSteps } from "./components/PlatformSteps";
 import { Capabilities } from "./components/Capabilities";
-import { MediaSection } from "./components/MediaSection";
+// import { MediaSection } from "./components/MediaSection";
 import { FinalCTA } from "./components/FinalCTA";
 import { Footer } from "./components/Footer";
 
@@ -20,7 +20,7 @@ function App() {
         <AgentsStory />
         <PlatformSteps />
         <Capabilities />
-        <MediaSection />
+        {/* <MediaSection /> */}
         <FinalCTA />
       </main>
       <Footer />
