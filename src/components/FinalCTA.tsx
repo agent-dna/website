@@ -67,7 +67,12 @@ export function FinalCTA() {
               </p>
 
               <div className="mt-7 flex flex-wrap gap-3">
-                <a href="#book" className="btn-primary">
+                <a
+                  href="https://agentdna.io/beta"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-primary"
+                >
                   Book a Demo <ArrowRight className="h-4 w-4" />
                 </a>
                 <a href="#talk" className="btn-ghost-light">

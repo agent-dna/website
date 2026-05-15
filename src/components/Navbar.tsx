@@ -3,11 +3,11 @@ import { Menu, X, ArrowRight } from "lucide-react";
 import { Logo } from "./Logo";
 
 const links = [
-  { label: "Platform", href: "#platform" },
   { label: "Ecosystem", href: "#ecosystem" },
   { label: "AI Threats", href: "#ai-threats" },
+  { label: "Platform", href: "#platform" },
   { label: "Capabilities", href: "#capabilities" },
-  { label: "Resources", href: "#resources" },
+  // { label: "Resources", href: "#resources" },
   { label: "Company", href: "#company" },
 ];
 
@@ -24,10 +24,10 @@ export function Navbar() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-3 z-50 transition-all ${
+      className={`fixed inset-x-0 top-3 z-50 bg-white transition-all ${
         scrolled
-          ? "border-b border-soft-200 bg-white/85 backdrop-blur-xl"
-          : "border-b border-transparent bg-white/0"
+          ? "border-b border-soft-200 shadow-soft"
+          : "border-b border-transparent"
       }`}
     >
       <nav className="container-page flex h-16 items-center justify-between pt-[5px]">
@@ -49,7 +49,12 @@ export function Navbar() {
         </ul>
 
         <div className="hidden items-center gap-2 lg:flex">
-          <a href="#demo" className="btn-primary">
+          <a
+            href="https://agentdna.io/beta"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-primary"
+          >
             Book a Demo <ArrowRight className="h-4 w-4" />
           </a>
         </div>
@@ -79,7 +84,12 @@ export function Navbar() {
             ))}
           </ul>
           <div className="mt-4 flex gap-2">
-            <a href="#demo" className="btn-primary flex-1">
+            <a
+              href="https://agentdna.io/beta"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary flex-1"
+            >
               Book a Demo
             </a>
           </div>

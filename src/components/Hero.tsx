@@ -110,10 +110,20 @@ export function Hero() {
               transition={{ duration: 0.6, delay: 0.15 }}
               className="mt-10 flex flex-wrap items-center gap-2.5 lg:mt-12"
             >
-              <a href="#demo" className="btn-primary">
+              <a
+                href="https://agentdna.io/beta"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-primary"
+              >
                 Book a Demo <ArrowRight className="h-4 w-4" />
               </a>
-              <a href="#platform" className="btn-secondary">
+              <a
+                href="https://dashboard.agentdna.io/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-secondary"
+              >
                 <PlayCircle className="h-4 w-4" />
                 View in Action
               </a>
@@ -154,6 +164,7 @@ export function Hero() {
             { value: "100%", label: "identity coverage" },
             { value: "0", label: "unverified actions" },
             { value: "90%+", label: "blast-radius reduction" },
+            { value: "100%", label: "tamper-evident logging" },
           ].map((m, i, arr) => (
             <div key={m.label} className="flex flex-none items-center gap-x-6 whitespace-nowrap lg:gap-x-10">
               <div className="flex items-baseline gap-2">

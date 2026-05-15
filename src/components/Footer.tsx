@@ -52,7 +52,7 @@ export function Footer() {
       <div className="container-page py-16">
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-12">
           <div className="lg:col-span-5">
-            <Logo variant="white" height={32} />
+            <Logo variant="white" height={64} />
             <p className="mt-5 max-w-md text-sm text-white/65">
               AgentDNA is the identity, authorization, and provenance layer for
               AI agent execution.
@@ -72,13 +72,16 @@ export function Footer() {
 
             <div className="mt-6 flex items-center gap-2">
               {[
-                { Icon: IconX, href: "#" },
-                { Icon: IconLinkedIn, href: "#" },
-                { Icon: IconGitHub, href: "#" },
-              ].map(({ Icon, href }, i) => (
+                { Icon: IconX,        href: "https://x.com/Agent_DNA",                                    label: "AgentDNA on X" },
+                { Icon: IconLinkedIn, href: "https://www.linkedin.com/company/agentdna/posts/?feedView=all", label: "AgentDNA on LinkedIn" },
+                { Icon: IconGitHub,   href: "https://github.com/agent-dna",                                label: "AgentDNA on GitHub" },
+              ].map(({ Icon, href, label }) => (
                 <a
-                  key={i}
+                  key={href}
                   href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
                   className="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white/80 transition-all hover:border-electric-300 hover:text-electric-300"
                 >
                   <Icon className="h-4 w-4" />
