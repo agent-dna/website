@@ -525,11 +525,7 @@ function ConnectInstall() {
     <DashboardSection
       title="Install"
       subtitle="Add the AgentDNA SDK and enable the runtime hook"
-      counters={[
-        { label: "Package", value: "v1.2.0" },
-        { label: "Runtime", value: "ready" },
-        { label: "Latency", value: "<8ms" },
-      ]}
+   
     >
       <div className="flex flex-col gap-2.5">
         <CodePanel
@@ -563,11 +559,7 @@ function ConnectIdentities() {
     <DashboardSection
       title="Identities"
       subtitle="Assign unique identities to users, agents, and non-human actors"
-      counters={[
-        { label: "Users", value: 1 },
-        { label: "Agents", value: 1 },
-        { label: "Verified", value: "100%" },
-      ]}
+  
     >
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
         <div>
@@ -624,11 +616,7 @@ function ConnectEnable() {
     <DashboardSection
       title="Security layer"
       subtitle="Enable AgentDNA across agent-to-agent, agent-to-tool, and agent-to-app calls"
-      counters={[
-        { label: "Hops", value: 3 },
-        { label: "Verified", value: "all" },
-        { label: "Latency", value: "12ms" },
-      ]}
+   
     >
       <div className="flex flex-col gap-2.5">
         <CodePanel
@@ -666,7 +654,6 @@ function ConnectOnChain() {
     { time: "12:04:22", label: "Policy decision attached", hash: "0x4f1a…b8c2",      status: "signed",    Icon: FileSignature },
     { time: "12:04:23", label: "Provenance hash generated",hash: "0xa2c1…e08f",      status: "recorded",  Icon: Hash },
     { time: "12:04:24", label: "Transaction recorded",     hash: "tx 0x9b22…77b1",   status: "recorded",  Icon: Hash },
-    { time: "12:04:25", label: "Chain record confirmed",   hash: "block 8,412,933",  status: "confirmed", Icon: CheckCircle2 },
   ];
   const TONE: Record<Status, { tile: string; chip: string }> = {
     signed:    { tile: "bg-electric-50 text-electric-600", chip: "bg-electric-50 text-electric-700 border-electric-200" },
@@ -677,11 +664,7 @@ function ConnectOnChain() {
     <DashboardSection
       title="On-chain records"
       subtitle="Interaction signed · provenance recorded · on-chain evidence created"
-      counters={[
-        { label: "Records", value: "13,239" },
-        { label: "Today", value: 482 },
-        { label: "Confirmed", value: "100%" },
-      ]}
+    
     >
       <ul className="space-y-1.5">
         {records.map((r, i) => {
@@ -733,11 +716,7 @@ function GovernAccess() {
     <DashboardSection
       title="SaaS access approvals"
       subtitle="Approve which agents can connect to your apps"
-      counters={[
-        { label: "Requests", value: 412 },
-        { label: "Approved", value: 318 },
-        { label: "Blocked", value: 23 },
-      ]}
+     
     >
       <ul className="space-y-1.5">
         {rows.map((r, i) => (
@@ -780,11 +759,6 @@ function GovernSkills() {
     <DashboardSection
       title="Skills & tool registry"
       subtitle="skills.md · agent.md · MCP configs · CrewAI · LangGraph · AutoGen · policy"
-      counters={[
-        { label: "Files", value: 8 },
-        { label: "Verified", value: 100 },
-        { label: "Owners", value: 5 },
-      ]}
     >
       <div className="overflow-hidden rounded-xl border border-soft-200">
         <table className="w-full text-left text-[11.5px]">
@@ -840,11 +814,7 @@ function GovernHistory() {
     <DashboardSection
       title="Audit history"
       subtitle="Every policy, skill, instruction, and tool change — with provenance"
-      counters={[
-        { label: "Edits today", value: 12 },
-        { label: "Approvals", value: 8 },
-        { label: "Pending", value: 1 },
-      ]}
+    
     >
       <ol className="relative ml-2 space-y-3 border-l border-soft-200 pl-4">
         {events.map((e, i) => (
@@ -918,11 +888,7 @@ function ObserveAdmin() {
     <DashboardSection
       title="Admin · workflow control plane"
       subtitle="Identities, workflows, policies, and provenance — unified"
-      counters={[
-        { label: "Live", value: 132 },
-        { label: "Blocked", value: 184 },
-        { label: "Today", value: 482 },
-      ]}
+    
     >
       <div className="flex flex-col gap-2.5">
         <div className="grid grid-cols-3 gap-1.5 sm:grid-cols-4 lg:grid-cols-7">
@@ -1004,11 +970,7 @@ function ObserveUser() {
     <DashboardSection
       title="User · activity timeline"
       subtitle="Every agent action taken on alice's behalf"
-      counters={[
-        { label: "Steps", value: 7 },
-        { label: "Approved", value: 5 },
-        { label: "Blocked", value: 1 },
-      ]}
+     
     >
       <ol className="relative ml-2 space-y-3 border-l border-soft-200 pl-4">
         {events.map((e, i) => {
@@ -1063,11 +1025,7 @@ function ObserveAgent() {
     <DashboardSection
       title="Agent · execution profile"
       subtitle="Identity, skills, allowed tools, decisions, and provenance"
-      counters={[
-        { label: "Allowed", value: "12,402" },
-        { label: "Blocked", value: 23 },
-        { label: "Records", value: "1,204" },
-      ]}
+     
     >
       <div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
         <div className="rounded-2xl border border-electric-200 bg-electric-50/40 p-3">
@@ -1201,12 +1159,10 @@ function StatusChip({ icon: Icon, tone, label }: {
 function DashboardSection({
   title,
   subtitle,
-  counters,
   children,
 }: {
   title: string;
   subtitle: string;
-  counters: { label: string; value: string | number }[];
   children: React.ReactNode;
 }) {
   return (
@@ -1221,18 +1177,7 @@ function DashboardSection({
             {subtitle}
           </h4>
         </div>
-        <div className="hidden items-center gap-3 sm:flex">
-          {counters.map((c) => (
-            <div key={c.label} className="text-right">
-              <div className="font-mono text-[9.5px] uppercase tracking-wider text-ink-mute">
-                {c.label}
-              </div>
-              <div className="font-display text-[14px] font-semibold text-navy-500">
-                {c.value}
-              </div>
-            </div>
-          ))}
-        </div>
+       
       </div>
       {children}
     </>
