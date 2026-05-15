@@ -22,24 +22,24 @@ function IconGitHub(props: React.SVGProps<SVGSVGElement>) {
   );
 }
 
-const cols = [
-  {
-    title: "Product",
-    links: ["Overview", "Features", "Integrations", "Pricing"],
-  },
-  {
-    title: "Solutions",
-    links: ["By Use Case", "By Industry", "For Developers", "For Security Teams"],
-  },
-  {
-    title: "Resources",
-    links: ["Documentation", "Blog", "Guides", "Webinars"],
-  },
-  {
-    title: "Company",
-    links: ["About", "Careers", "Partners", "Contact"],
-  },
-];
+// const cols = [
+//   {
+//     title: "Product",
+//     links: ["Overview", "Features", "Integrations", "Pricing"],
+//   },
+//   {
+//     title: "Solutions",
+//     links: ["By Use Case", "By Industry", "For Developers", "For Security Teams"],
+//   },
+//   {
+//     title: "Resources",
+//     links: ["Documentation", "Blog", "Guides", "Webinars"],
+//   },
+//   {
+//     title: "Company",
+//     links: ["About", "Careers", "Partners", "Contact"],
+//   },
+// ];
 
 export function Footer() {
   return (
@@ -49,32 +49,40 @@ export function Footer() {
         className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-electric-500/40 to-transparent"
       />
 
-      <div className="container-page py-16">
-        <div className="grid grid-cols-1 gap-10 lg:grid-cols-12">
-          <div className="lg:col-span-5">
+      <div className="container-page py-10">
+        <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
+          {/* Left — logo + tagline */}
+          <div className="max-w-md">
             <Logo variant="white" height={64} />
-            <p className="mt-5 max-w-md text-sm text-white/65">
-              AgentDNA is the identity, authorization, and provenance layer for
-              AI agent execution.
+            <p className="mt-4 text-[14px] leading-relaxed text-white/70">
+              AgentDNA is the identity, authorization, and provenance layer
+              for AI agent execution.
             </p>
+          </div>
 
-            <div className="mt-6 flex flex-col gap-1.5 text-sm text-white/70">
+          {/* Right — emails + social icons */}
+          <div className="flex flex-col gap-3 text-sm text-white/70 lg:items-end lg:text-right">
+            <div className="flex flex-col gap-1 lg:items-end">
               <a
                 href="mailto:hello@agentdna.io"
                 className="hover:text-electric-300"
               >
                 hello@agentdna.io
               </a>
-              <a href="https://agentdna.io" className="hover:text-electric-300">
+              <a
+                href="https://agentdna.io"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-electric-300"
+              >
                 agentdna.io
               </a>
             </div>
-
-            <div className="mt-6 flex items-center gap-2">
+            <div className="flex items-center gap-2">
               {[
-                { Icon: IconX,        href: "https://x.com/Agent_DNA",                                    label: "AgentDNA on X" },
+                { Icon: IconX,        href: "https://x.com/Agent_DNA",                                       label: "AgentDNA on X" },
                 { Icon: IconLinkedIn, href: "https://www.linkedin.com/company/agentdna/posts/?feedView=all", label: "AgentDNA on LinkedIn" },
-                { Icon: IconGitHub,   href: "https://github.com/agent-dna",                                label: "AgentDNA on GitHub" },
+                { Icon: IconGitHub,   href: "https://github.com/agent-dna",                                  label: "AgentDNA on GitHub" },
               ].map(({ Icon, href, label }) => (
                 <a
                   key={href}
@@ -89,48 +97,10 @@ export function Footer() {
               ))}
             </div>
           </div>
-
-          <div className="grid grid-cols-2 gap-8 lg:col-span-7 lg:grid-cols-4">
-            {cols.map((col) => (
-              <div key={col.title}>
-                <h4 className="text-[12px] font-semibold uppercase tracking-[0.18em] text-white/55">
-                  {col.title}
-                </h4>
-                <ul className="mt-4 space-y-2.5">
-                  {col.links.map((l) => (
-                    <li key={l}>
-                      <a
-                        href="#"
-                        className="text-[14px] text-white/80 transition-colors hover:text-electric-300"
-                      >
-                        {l}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
         </div>
 
-        <div className="mt-14 flex flex-col items-start justify-between gap-4 border-t border-white/10 pt-6 sm:flex-row sm:items-center">
-          <div className="text-[12px] text-white/50">
-            © 2026 AgentDNA. All rights reserved.
-          </div>
-          <div className="flex items-center gap-5 text-[12px] text-white/50">
-            <a href="#" className="hover:text-electric-300">
-              Privacy
-            </a>
-            <a href="#" className="hover:text-electric-300">
-              Terms
-            </a>
-            <a href="#" className="hover:text-electric-300">
-              Security
-            </a>
-            <a href="#" className="hover:text-electric-300">
-              Status
-            </a>
-          </div>
+        <div className="mt-8 border-t border-white/10 pt-4 text-[12px] text-white/50">
+          © 2026 AgentDNA. All rights reserved.
         </div>
       </div>
     </footer>
