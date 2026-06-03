@@ -1,4 +1,4 @@
-import { ArrowRight, MessageCircle } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { AgentDNACharacter } from "./AgentDNACharacter";
 
 export function FinalCTA() {
