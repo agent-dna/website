@@ -75,10 +75,10 @@ export function FinalCTA() {
                 >
                   Book a Demo <ArrowRight className="h-4 w-4" />
                 </a>
-                <a href="#talk" className="btn-ghost-light">
+                {/* <a href="#talk" className="btn-ghost-light">
                   <MessageCircle className="h-4 w-4" />
                   Talk to Our Team
-                </a>
+                </a> */}
               </div>
             </div>
 
