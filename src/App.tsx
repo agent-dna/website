@@ -6,6 +6,7 @@ import { AgentsStory } from "./components/AgentsStory";
 import { PlatformSteps } from "./components/PlatformSteps";
 import { Capabilities } from "./components/Capabilities";
 // import { MediaSection } from "./components/MediaSection";
+import { BetaAccess } from "./components/BetaAccess";
 import { FinalCTA } from "./components/FinalCTA";
 import { Footer } from "./components/Footer";
 
@@ -21,6 +22,7 @@ function App() {
         <PlatformSteps />
         <Capabilities />
         {/* <MediaSection /> */}
+        <BetaAccess />
         <FinalCTA />
       </main>
       <Footer />

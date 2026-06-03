@@ -7,6 +7,7 @@ const links = [
   { label: "AI Threats", href: "#ai-threats" },
   { label: "Platform", href: "#platform" },
   { label: "Capabilities", href: "#capabilities" },
+  { label: "Beta", href: "#beta" },
   // { label: "Resources", href: "#resources" },
   { label: "Company", href: "#company" },
 ];
@@ -51,8 +52,6 @@ export function Navbar() {
         <div className="hidden items-center gap-2 lg:flex">
           <a
             href="https://agentdna.io/beta"
-            target="_blank"
-            rel="noopener noreferrer"
             className="btn-primary"
           >
             Book a Demo <ArrowRight className="h-4 w-4" />

@@ -308,7 +308,7 @@ export function PlatformSteps() {
             Observe every action with provenance.
           </span>
         </p>
-        <div className="mt-6 flex justify-center">
+        {/* <div className="mt-6 flex justify-center">
           <a
             href="https://dashboard.agentdna.io/"
             target="_blank"
@@ -317,7 +317,7 @@ export function PlatformSteps() {
           >
             View Product Demo <ArrowRight className="h-4 w-4" />
           </a>
-        </div>
+        </div> */}
       </div>
     </section>
   );
