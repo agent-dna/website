@@ -51,7 +51,7 @@ export function Navbar() {
 
         <div className="hidden items-center gap-2 lg:flex">
           <a
-            href="https://agentdna.io/beta"
+            href="/#beta"
             className="btn-primary"
           >
             Book a Demo <ArrowRight className="h-4 w-4" />

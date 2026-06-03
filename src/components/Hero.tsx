@@ -111,11 +111,9 @@ export function Hero() {
               className="mt-10 flex flex-wrap items-center gap-2.5 lg:mt-12"
             >
               <a
-                href="https://agentdna.io/beta"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-primary"
-              >
+            href="/#beta"
+            className="btn-primary"
+          >
                 Book a Demo <ArrowRight className="h-4 w-4" />
               </a>
               <a
